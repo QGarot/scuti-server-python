@@ -2,7 +2,7 @@ import asyncore
 import threading
 from asyncore import dispatcher
 import socket
-from network.echo_handler import EchoHandler
+from network.connection import Connection
 
 
 class Server(dispatcher):
@@ -18,4 +18,4 @@ class Server(dispatcher):
 
     def handle_accepted(self, sock, addr):
         print("New connection from " + str(addr))
-        self.handler = EchoHandler(sock)
+        self.handler = Connection(sock)
