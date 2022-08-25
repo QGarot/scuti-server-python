@@ -1,3 +1,6 @@
+from typing import Union
+
+from communication.outgoing.message_composer import MessageComposer
 from network.binary.request import Request
 import struct
 
@@ -18,14 +21,13 @@ def parse(response, connection):
                      + "<allow-access-from domain=\"*\" to-ports=\"*\" />\r\n"
                      + "</cross-domain-policy>\0"))
     else:
-
         stream = Request(connection.recv(struct.unpack_from(">i", response, 0)[0]))
         message_header = stream.read_short()
 
         return message_header, stream
 
 
-def encode(message):
+def encode(message: Union[MessageComposer, str, Response]):
     """
     Return outcoming data from client
     :param message:

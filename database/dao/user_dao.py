@@ -24,9 +24,9 @@ class UserDao:
         """
         Fill user details thanks to row, get with SQL query
         """
-        session.details.id = row[0]
-        session.details.username = row[1]
-        session.details.motto = row[3]
-        session.details.figure = row[4]
-        session.details.rank = row[2]
-        session.details.credits = row[5]
+        user.details.id = row[0]
+        user.details.username = row[1]
+        user.details.motto = row[3]
+        user.details.figure = row[4]
+        user.details.rank = row[2]
+        user.details.credits = row[5]
