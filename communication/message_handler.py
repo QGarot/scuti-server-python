@@ -1,5 +1,7 @@
 import utils.logger
 import communication.incoming.header as headers
+from communication.incoming.login.UniqueIDMessageEvent import UniqueIDMessageEvent
+from communication.incoming.login.VersionCheckMessageEvent import VersionCheckMessageEvent
 from communication.incoming.login.authenticate_message_event import AuthenticateMessageEvent
 from game.user.user import User
 from network.binary.request import Request
@@ -20,7 +22,9 @@ class MessageHandler:
         Here register all incoming headers
         """
         self.incoming = {
-            headers.AuthenticateMessageEvent: AuthenticateMessageEvent()
+            headers.AuthenticateMessageEvent: AuthenticateMessageEvent(),
+            headers.UniqueIDMessageEvent: UniqueIDMessageEvent(),
+            headers.VersionCheckMessageEvent: VersionCheckMessageEvent(),
         }
 
     def handle(self, user: User, header: int, request: Request):
