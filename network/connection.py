@@ -1,5 +1,4 @@
 from game.user.user import User
-from game.user.user_manager import UserManager
 from utils.message_treatment import parse
 from asyncore import dispatcher_with_send
 

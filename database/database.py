@@ -1,5 +1,4 @@
 import mysql.connector
-from utils.logger import error
 
 
 class Database:
@@ -16,11 +15,11 @@ class Database:
 
     def __init__(self, host, user, password, name):
         """
-        Cette classe permet de gèrer les actions effectuées sur la base de données sélectionnée.
-        :param host: Hôte du server MySQL
-        :param user: Nom d'utilisateur
-        :param password: Mot de passe
-        :param name: Nom de la base de données
+        This class allows to manage actions on database selected
+        :param host:
+        :param user:
+        :param password:
+        :param name:
         """
         self.host = host
         self.user = user
@@ -31,6 +30,10 @@ class Database:
         self.cursor = None
 
     def prepare_db(self):
+        """
+        Connect to database and get cursor. This method must be called before each action on database.
+        :return:
+        """
         self.connection = mysql.connector.connect(
             host=self.host,
             port=3306,
@@ -42,6 +45,10 @@ class Database:
         self.cursor = self.connection.cursor()
 
     def close_connection(self):
+        """
+        Close connection and cursor. This method must be called after each action on database.
+        :return:
+        """
         self.cursor.close()
         self.connection.close()
         self.cursor = None
@@ -49,7 +56,7 @@ class Database:
 
     def update(self, table_name, attribute, new_value, sql_condition):
         """
-        Permet de mettre à jour des données.
+        Update data
         :param table_name:
         :param attribute:
         :param new_value:
@@ -66,10 +73,10 @@ class Database:
 
     def insert(self, table_name, structure, values):
         """
-        Permet d'enregistrer des valeurs dans la table table_name.
-        :param table_name: Nom de la table
-        :param structure: Structure de la table
-        :param values: Les attributs sous forme de liste ou de tuple
+        Save data.
+        :param table_name:
+        :param structure:
+        :param values:
         :return: None
         """
 
@@ -83,8 +90,7 @@ class Database:
 
     def select(self, attributes, table_name, sql_condition=None) -> list:
         """
-        Retourne une liste correspondant aux enregistrements retournés par la requête.
-        Cette liste contient des n-uplets si n attributs sont sélectionnés dans la requête.
+        Return a list of n-tuple if n fields are selected
         :param sql_condition:
         :param table_name:
         :param attributes:

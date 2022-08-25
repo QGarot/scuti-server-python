@@ -16,11 +16,21 @@ class MessageHandler:
         return cls.instance
 
     def __init__(self):
+        """
+        Here register all incoming headers
+        """
         self.incoming = {
             headers.AuthenticateMessageEvent: AuthenticateMessageEvent()
         }
 
     def handle(self, user: User, header: int, request: Request):
+        """
+        Handle a user message (incoming)
+        :param user:
+        :param header:
+        :param request:
+        :return:
+        """
         if header in self.incoming:
             utils.logger.log_packet(header, "OK")
             self.incoming[header].handle(user, request)

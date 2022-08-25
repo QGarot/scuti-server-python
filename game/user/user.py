@@ -7,4 +7,8 @@ class User:
         self.details = Details()
 
     def get_details(self) -> Details:
+        """
+        Get details
+        :return:
+        """
         return self.details

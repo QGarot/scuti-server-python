@@ -20,8 +20,9 @@ class UserDao:
             return False
 
     @classmethod
-    def fill_data(cls, session, row):
+    def fill_data(cls, user: User, row):
         """
+        Fill user details thanks to row, get with SQL query
         """
         session.details.id = row[0]
         session.details.username = row[1]

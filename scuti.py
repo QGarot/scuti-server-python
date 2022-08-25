@@ -14,12 +14,20 @@ class Scuti:
 
     @staticmethod
     def display_about():
+        """
+        Display information about Scuti
+        :return:
+        """
         print("~ Scuti Project ~")
         print("Tig3r & KOZEN")
         print("")
 
     @staticmethod
     def load():
+        """
+        Instantiate manager classes
+        :return:
+        """
         MessageHandler().get_instance()
         info("Message handler loaded!")
 
@@ -30,5 +38,11 @@ class Scuti:
         info("User loaded!")
 
     def run(self, host: str, port: int):
+        """
+        Start scuti server!
+        :param host:
+        :param port:
+        :return:
+        """
         self.server = Server(host, port)
         print(">> Server on!")

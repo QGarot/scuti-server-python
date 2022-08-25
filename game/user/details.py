@@ -11,6 +11,16 @@ class Details:
         self.authenticated = False
 
     def fill_details(self, user_id, username, motto, figure, rank, credits):
+        """
+        Fill data
+        :param user_id:
+        :param username:
+        :param motto:
+        :param figure:
+        :param rank:
+        :param credits:
+        :return:
+        """
         self.id = user_id
         self.username = username
         self.motto = motto
