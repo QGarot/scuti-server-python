@@ -3,6 +3,8 @@ from typing import Optional
 from database.dao.user_dao import UserDao
 from game.user.user import User
 
+from utils.logger import info
+
 
 class UserManager:
     instance = None
@@ -36,6 +38,7 @@ class UserManager:
         if user_id in self.users:
             user.socket.close()
             self.users.pop(user_id)
+            info(user.get_details().username + " just disconnected!")
 
     def get_users_connected(self):
         """
@@ -76,6 +79,6 @@ class UserManager:
         """
         if UserDao.authenticate(user, sso_ticket):
             self.add_user(user)
-            print("TOUUUUT FONCTIONNE STP")
+            info(user.get_details().username + " is now connected!")
         else:
             user.socket.close()

@@ -20,5 +20,3 @@ class AuthenticateMessageEvent(MessageEvent):
         user.send(HomeRoomMessageComposer(0, False))
         user.send(LandingWidgetMessageComposer())
         user.send(AvailabilityMessageComposer())
-
-        print("stp dsl enft")

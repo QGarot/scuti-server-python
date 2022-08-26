@@ -1,6 +1,8 @@
 from game.user.user import User
+from game.user.user_manager import UserManager
 from utils.message_treatment import parse
 from asyncore import dispatcher_with_send
+
 
 from communication.message_handler import MessageHandler
 
@@ -18,3 +20,7 @@ class Connection(dispatcher_with_send):
             MessageHandler.get_instance().handle(self.user, header, request)
         else:
             self.socket.close()
+
+    def handle_close(self) -> None:
+        UserManager.get_instance().disconnect(self.user)
+        self.close()
