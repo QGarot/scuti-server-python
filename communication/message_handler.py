@@ -3,6 +3,8 @@ import communication.incoming.header as headers
 from communication.incoming.login.UniqueIDMessageEvent import UniqueIDMessageEvent
 from communication.incoming.login.VersionCheckMessageEvent import VersionCheckMessageEvent
 from communication.incoming.login.authenticate_message_event import AuthenticateMessageEvent
+from communication.incoming.user.GetCurrencyBalanceMessageEvent import CurrencyBalanceMessageEvent
+from communication.incoming.user.InfoRetrieveMessageEvent import InfoRetrieveMessageEvent
 from game.user.user import User
 from network.binary.request import Request
 
@@ -25,6 +27,9 @@ class MessageHandler:
             headers.AuthenticateMessageEvent: AuthenticateMessageEvent(),
             headers.UniqueIDMessageEvent: UniqueIDMessageEvent(),
             headers.VersionCheckMessageEvent: VersionCheckMessageEvent(),
+
+            headers.InfoRetrieveMessageEvent: InfoRetrieveMessageEvent(),
+            headers.GetCurrencyBalanceMessageEvent: CurrencyBalanceMessageEvent()
         }
 
     def handle(self, user: User, header: int, request: Request):
