@@ -20,3 +20,5 @@ class AuthenticateMessageEvent(MessageEvent):
         user.send(HomeRoomMessageComposer(0, False))
         user.send(LandingWidgetMessageComposer())
         user.send(AvailabilityMessageComposer())
+
+        user.send_motd_notification("Welcome to Scuti :)")

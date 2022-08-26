@@ -1,4 +1,5 @@
 from communication.outgoing.message_composer import MessageComposer
+from communication.outgoing.user.MOTDNotificationMessageComposer import MOTDNotificationMessageComposer
 from game.user.details import Details
 from utils.message_treatment import encode
 
@@ -22,3 +23,11 @@ class User:
         :return:
         """
         self.socket.send(encode(message_composer))
+
+    def send_motd_notification(self, msg: str):
+        """
+        Send alert to this user
+        :param msg:
+        :return:
+        """
+        self.send(MOTDNotificationMessageComposer(msg))
