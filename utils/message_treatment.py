@@ -44,4 +44,5 @@ def encode(message: Union[MessageComposer, str, Response]):
     # Assume this is a composer class
     # Build message in bytes for clients from composer
     else:
+        message.compose()
         return message.response.get_buffer()
