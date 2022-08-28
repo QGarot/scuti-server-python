@@ -1,7 +1,5 @@
-from communication.outgoing.room.HeightMapMessageComposer import HeightMapMessageComposer
 from game.room.room_data import RoomData
 from game.room.room_model import RoomModel
-from game.user.user import User
 
 
 class Room:
