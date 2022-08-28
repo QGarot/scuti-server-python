@@ -2,7 +2,9 @@ import utils.logger
 import communication.incoming.header as headers
 from communication.incoming.login.UniqueIDMessageEvent import UniqueIDMessageEvent
 from communication.incoming.login.VersionCheckMessageEvent import VersionCheckMessageEvent
-from communication.incoming.login.authenticate_message_event import AuthenticateMessageEvent
+from communication.incoming.login.AuthenticateMessageEvent import AuthenticateMessageEvent
+from communication.incoming.room.EnterRoomMessageEvent import EnterRoomMessageEvent
+from communication.incoming.room.HeightMapMessageEvent import HeightMapMessageEvent
 from communication.incoming.user.GetCurrencyBalanceMessageEvent import CurrencyBalanceMessageEvent
 from communication.incoming.user.InfoRetrieveMessageEvent import InfoRetrieveMessageEvent
 from game.user.user import User
@@ -29,7 +31,10 @@ class MessageHandler:
             headers.VersionCheckMessageEvent: VersionCheckMessageEvent(),
 
             headers.InfoRetrieveMessageEvent: InfoRetrieveMessageEvent(),
-            headers.GetCurrencyBalanceMessageEvent: CurrencyBalanceMessageEvent()
+            headers.GetCurrencyBalanceMessageEvent: CurrencyBalanceMessageEvent(),
+
+            headers.EnterRoomMessageEvent: EnterRoomMessageEvent(),
+            headers.HeightMapMessageEvent: HeightMapMessageEvent(),
         }
 
     def handle(self, user: User, header: int, request: Request):

@@ -17,8 +17,8 @@ class AuthenticateMessageEvent(MessageEvent):
 
         user.send(AuthenticationOKMessageComposer())
         user.send(UniqueMachineIDMessageComposer(user.get_details().machine_id))
-        user.send(HomeRoomMessageComposer(0, False))
+        user.send(HomeRoomMessageComposer(4, True))
         user.send(LandingWidgetMessageComposer())
         user.send(AvailabilityMessageComposer())
 
-        user.send_motd_notification("Welcome to Scuti :)")
+        user.send_motd_notification("Hi " + user.get_details().username + ", Welcome to Scuti :)")

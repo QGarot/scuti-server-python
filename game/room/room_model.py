@@ -24,6 +24,8 @@ class RoomModel:
         # Height (int) of each square
         self.square_height = None
 
+        self.generate_heightmap_lookups()
+
     def generate_heightmap_lookups(self) -> None:
         """
         Generate squares & square_height arrays thanks to heightmap
@@ -35,6 +37,7 @@ class RoomModel:
         self.map_size_y = len(temporary)
 
         self.squares = []
+        self.square_height = []
 
         for y in range(self.map_size_y):
             line = temporary[y]
@@ -42,7 +45,7 @@ class RoomModel:
             line = line.replace(chr(13), "")
 
             self.squares.append([])
-            self.squares.append([])
+            self.square_height.append([])
             x = 0
             for square in line:
                 if square == "x":

@@ -1,5 +1,6 @@
 from communication.message_handler import MessageHandler
 from database.database import Database
+from game.room.room_manager import RoomManager
 from game.user.user_manager import UserManager
 from network.server import Server
 from utils.logger import info
@@ -36,6 +37,10 @@ class Scuti:
 
         UserManager.get_instance()
         info("User loaded!")
+
+        RoomManager.get_instance()
+        RoomManager.get_instance().load_models()
+        info("Room loaded!")
 
     def run(self, host: str, port: int):
         """
