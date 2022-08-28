@@ -1,5 +1,7 @@
+from communication.outgoing.message_composer import MessageComposer
 from game.room.room_data import RoomData
 from game.room.room_model import RoomModel
+from game.user.user import User
 
 
 class Room:
@@ -7,6 +9,28 @@ class Room:
         self.room_data = RoomData()
         self.model = None
         self.mapping = None
+        self.entities = []
+
+    def get_users(self) -> list:
+        """
+        Return list of users in this room
+        :return:
+        """
+        users = []
+        for entity in self.entities:
+            if type(entity) == User:
+                users.append(entity)
+
+        return users
+
+    def send(self, message_composer: MessageComposer):
+        """
+        Send message to all users in this room
+        :param message_composer:
+        :return:
+        """
+        for user in self.get_users():
+            user.send(message_composer)
 
     def get_data(self) -> RoomData:
         return self.room_data
