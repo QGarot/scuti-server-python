@@ -16,14 +16,6 @@ class Room:
     def get_model(self) -> RoomModel:
         return self.model
 
-    def load_heightmap(self, user: User):
-        """
-        Load heightmap, walls, items
-        :param user: user to send the data to
-        :return:
-        """
-        user.send(HeightMapMessageComposer(user.room_user.room.model))
-
     def fill(self, row: tuple):
         """
         Fill instance with given row data
