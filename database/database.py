@@ -71,6 +71,33 @@ class Database:
 
         self.close_connection()
 
+    def update2(self, table_name: str, attributes: dict, sql_condition: str):
+        """
+        Update table name.
+        Example of attributes: {"name": "Tig3r"}
+        -> {"fied": new value of this field}
+        :param table_name:
+        :param attributes:
+        :param sql_condition:
+        :return:
+        """
+        attr_str = ""
+        first = True
+        for couple in attributes.items():
+            print(couple)
+            if first:
+                attr_str = attr_str + couple[0] + " = '" + str(couple[1]) + "'"
+                first = False
+            else:
+                attr_str = attr_str + ", " + couple[0] + " = '" + str(couple[1]) + "'"
+
+        self.prepare_db()
+        sql = "UPDATE " + table_name + " SET " + attr_str + " WHERE " + sql_condition
+        self.cursor.execute(sql)
+        self.connection.commit()
+
+        self.close_connection()
+
     def insert(self, table_name, structure, values):
         """
         Save data.
