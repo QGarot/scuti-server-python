@@ -17,7 +17,7 @@ class AuthenticateMessageEvent(MessageEvent):
 
         user.send(AuthenticationOKMessageComposer())
         user.send(UniqueMachineIDMessageComposer(user.get_details().machine_id))
-        user.send(HomeRoomMessageComposer(4, True))
+        user.send(HomeRoomMessageComposer(0, False))
         user.send(LandingWidgetMessageComposer())
         user.send(AvailabilityMessageComposer())
 

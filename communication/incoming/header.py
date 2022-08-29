@@ -41,3 +41,4 @@ PurchaseObjectMessageEvent = 2386#2893
 InventoryMessageEvent = 3031#3991
 PlaceItemMessageEvent = -1414#1414
 ApplyDecorationMessageEvent = -1421#1421
+ChangeAppearanceMessageEvent = 920

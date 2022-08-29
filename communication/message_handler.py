@@ -5,6 +5,7 @@ from communication.incoming.login.VersionCheckMessageEvent import VersionCheckMe
 from communication.incoming.login.AuthenticateMessageEvent import AuthenticateMessageEvent
 from communication.incoming.room.EnterRoomMessageEvent import EnterRoomMessageEvent
 from communication.incoming.room.HeightMapMessageEvent import HeightMapMessageEvent
+from communication.incoming.user.ChangeAppearanceMessageEvent import ChangeAppearanceMessageEvent
 from communication.incoming.user.GetCurrencyBalanceMessageEvent import CurrencyBalanceMessageEvent
 from communication.incoming.user.InfoRetrieveMessageEvent import InfoRetrieveMessageEvent
 from game.user.user import User
@@ -35,6 +36,8 @@ class MessageHandler:
 
             headers.EnterRoomMessageEvent: EnterRoomMessageEvent(),
             headers.HeightMapMessageEvent: HeightMapMessageEvent(),
+
+            headers.ChangeAppearanceMessageEvent: ChangeAppearanceMessageEvent(),
         }
 
     def handle(self, user: User, header: int, request: Request):

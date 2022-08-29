@@ -21,6 +21,7 @@ HeightMapMessageComposer = 3893#3806
 HomeRoomMessageComposer = 3255#704
 HotelScreenMessageComposer = 3035#3825
 InitialRoomInfoMessageComposer = 3964#2075
+AvatarAspectUpdateMessageComposer = 750
 InitMessengerMessageComposer = 1475#2925
 LandingWidgetMessageComposer = 3113#1351
 MessengerCategoriesMessageComposer = -249#249
