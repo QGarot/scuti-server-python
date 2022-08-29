@@ -9,10 +9,12 @@ class Details:
         self.credits = 0
         self.machine_id = ""
         self.authenticated = False
+        self.gender = ""
 
-    def fill_details(self, user_id, username, motto, figure, rank, credits):
+    def fill_details(self, user_id, username, motto, figure, rank, credits, gender):
         """
         Fill data
+        :param gender:
         :param user_id:
         :param username:
         :param motto:
@@ -27,6 +29,7 @@ class Details:
         self.figure = figure
         self.rank = rank
         self.credits = credits
+        self.gender = gender
 
     def get_user_object(self):
         pass

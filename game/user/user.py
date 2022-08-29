@@ -44,3 +44,4 @@ class User:
         self.get_details().figure = row[4]
         self.get_details().rank = row[2]
         self.get_details().credits = row[5]
+        self.get_details().gender = row[6]
