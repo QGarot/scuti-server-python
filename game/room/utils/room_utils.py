@@ -24,6 +24,21 @@ class RoomUtils:
 
         user.send(RoomModelMessageComposer(room_model_name, room_id))
 
+        floor_data = int(room.get_data().floor)
+        wall_data = int(room.get_data().wall)
+
+        # Floor design
+        # if floor_data > 0:
+        #     session.send(RoomSpacesMessageComposer("floor", self.data.floor))
+
+        # Wall design
+        # if wall_data > 0:
+        #     session.send(RoomSpacesMessageComposer("wall", self.data.wall))
+
+        # Landscape design
+        # session.send(RoomSpacesMessageComposer("landscape", self.data.landscape))
+        # session.send(PrepareRoomMessageComposer(self.data.id))
+
     @staticmethod
     def load_heightmap(user: User, room_model: RoomModel):
         """
@@ -33,3 +48,12 @@ class RoomUtils:
         :return:
         """
         user.send(HeightMapMessageComposer(room_model))
+        #session.send(FloorMapMessageComposer(self))
+
+        # Display self
+        #self.send(UserDisplayMessageComposer([session]))
+        #self.send(UserStatusMessageComposer([session]))
+
+        # Display users for client
+        #session.send(UserDisplayMessageComposer(self.entities))
+        #session.send(UserStatusMessageComposer(self.entities))
