@@ -1,6 +1,7 @@
 from typing import Optional
 
 from database.dao.user_dao import UserDao
+from game.user.details import Details
 from game.user.user import User
 
 from utils.logger import info
@@ -17,6 +18,10 @@ class UserManager:
 
     def __init__(self):
         self.users = {}
+
+    @staticmethod
+    def save(details: Details):
+        UserDao.save(details)
 
     def add_user(self, user: User) -> None:
         """

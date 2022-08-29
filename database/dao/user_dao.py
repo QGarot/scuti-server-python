@@ -1,4 +1,5 @@
 from database.database import Database
+from game.user.details import Details
 from game.user.user import User
 
 
@@ -9,7 +10,7 @@ class UserDao:
         """
         Return true if : user with SSO Ticket is found. Then user is completly filled with corresponding data.
         """
-        select = Database.get_instance().select(attributes="id, username, rank, mission, figure, credits",
+        select = Database.get_instance().select(attributes="id, username, rank, mission, figure, credits, gender",
                                                 table_name="users",
                                                 sql_condition="sso_ticket='"+sso_ticket+"'")
 
@@ -18,3 +19,13 @@ class UserDao:
             return True
         else:
             return False
+
+    @staticmethod
+    def save(details: Details):
+        Database.get_instance().update2("users", {
+            "mission": details.motto,
+            "figure": details.figure,
+            "gender": details.gender,
+            "rank": details.rank,
+            "credits": details.credits
+        }, sql_condition="id = " + str(details.id))
