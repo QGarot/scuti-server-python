@@ -21,8 +21,19 @@ class RoomDao:
     @staticmethod
     def get_room_models() -> dict:
         models = dict()
-        select = Database.get_instance().select(attributes="*", table_name="room_models")
-        for row in select:
+        select_model = Database.get_instance().select(attributes="*", table_name="room_models")
+        for row in select_model:
+            model_name = row[0]
+            door_x = row[1]
+            door_y = row[2]
+            door_z = row[3]
+            door_rot = row[4]
+            heightmap = row[5]
+            models[row[0]] = RoomModel(model_name, heightmap, door_x, door_y, door_z, door_rot)
+
+        select_dynamic_model = Database.get_instance().select(attributes="*",
+                                                              table_name="room_models_dynamic")
+        for row in select_dynamic_model:
             model_name = row[0]
             door_x = row[1]
             door_y = row[2]
