@@ -120,13 +120,3 @@ class RoomModel:
             return 32
 
         return -1
-
-    def is_numeric(self, square):
-        try:
-            number = float(square)
-            return True
-        except Exception as e:
-            return False
-
-    def get_2d_array(self, data_type=None):
-        return [[data_type for y in range(0, self.map_size_y)] for x in range(0, self.map_size_x)]

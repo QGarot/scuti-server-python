@@ -2,9 +2,10 @@ from communication.outgoing.room.FloorMapMessageComposer import FloorMapMessageC
 from communication.outgoing.room.HeightMapMessageComposer import HeightMapMessageComposer
 from communication.outgoing.room.RoomModelMessageComposer import RoomModelMessageComposer
 from communication.outgoing.room.RoomSpacesMessageComposer import RoomSpacesMessageComposer
+from communication.outgoing.room.UserDisplayMessageComposer import UserDisplayMessageComposer
+from communication.outgoing.room.UserStatusMessageComposer import UserStatusMessageComposer
 from game.room.room import Room
 from game.room.room_manager import RoomManager
-from game.room.room_model import RoomModel
 from game.user.user import User
 
 
@@ -25,6 +26,11 @@ class RoomUtils:
 
         # Room User
         user.room_user.room = room
+        user.room_user.x = room.get_model().door_x
+        user.room_user.y = room.get_model().door_y
+        user.room_user.z = room.get_model().door_z
+        user.room_user.rotation = room.get_model().door_rotation
+        user.room_user.head_rotation = room.get_model().door_rotation
 
         user.send(RoomModelMessageComposer(room_model_name, room_id))
 
@@ -55,8 +61,8 @@ class RoomUtils:
         user.send(FloorMapMessageComposer(room))
 
         # Display self
-        #self.send(UserDisplayMessageComposer([session]))
-        #self.send(UserStatusMessageComposer([session]))
+        user.send(UserDisplayMessageComposer([user]))
+        user.send(UserStatusMessageComposer([user]))
 
         # Display users for client
         #session.send(UserDisplayMessageComposer(self.entities))

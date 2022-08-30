@@ -11,6 +11,13 @@ class User:
         self.details = Details()
         self.room_user = RoomUser()
 
+    def get_room_user(self):
+        """
+
+        :return:
+        """
+        return self.room_user
+
     def get_details(self) -> Details:
         """
         Get details
