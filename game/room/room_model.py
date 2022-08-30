@@ -1,71 +1,66 @@
-from enum import Enum
-
-
-class SquareState(Enum):
-    OPEN = 0
-    CLOSED = 1
+OPEN = 0
+CLOSED = 1
 
 
 class RoomModel:
-    def __init__(self, name: str, heightmap: str, door_x: int, door_y: int, door_z: float, door_rot: int):
+    def __init__(self, name, heightmap, door_x, door_y, door_z, door_rotation):
         self.name = name
         self.heightmap = heightmap
         self.door_x = door_x
         self.door_y = door_y
         self.door_z = door_z
-        self.door_rot = door_rot
+        self.door_rotation = door_rotation
 
-        self.map_size_x = None
-        self.map_size_y = None
-
-        # State (OPEN or CLOSE, cf. enum class SquareState) of each square
-        self.squares = None
-
-        # Height (int) of each square
-        self.square_height = None
-
-        self.generate_heightmap_lookups()
-
-    def generate_heightmap_lookups(self) -> None:
-        """
-        Generate squares & square_height arrays thanks to heightmap
-        :return:
-        """
         temporary = self.heightmap.split("{13}")
 
         self.map_size_x = len(temporary[0])
         self.map_size_y = len(temporary)
 
-        self.squares = []
-        self.square_height = []
+        self.squares = self.get_2d_array(CLOSED)
+        self.square_height = self.get_2d_array(CLOSED)
+        self.square_char = self.get_2d_array(CLOSED)
 
-        for y in range(self.map_size_y):
-            line = temporary[y]
-            line = line.replace(chr(10), "")
-            line = line.replace(chr(13), "")
+        for y in range(0, self.map_size_y):
 
-            self.squares.append([])
-            self.square_height.append([])
-            x = 0
-            for square in line:
+            # if y > 0:
+            #    temporary[y] = temporary[y][1:] # Substring 1
+
+            for x in range(0, self.map_size_x):
+                square = temporary[y][x:x + 1].strip().lower()
+
                 if square == "x":
-                    self.squares[y].append(SquareState.CLOSED)
-                    self.square_height[y].append(0)
-                else:
-                    self.squares[y].append(SquareState.OPEN)
-                    self.square_height[y].append(self.parse(square))
+                    self.squares.append(x)
+                    self.squares[x][y] = CLOSED
 
-                if x == self.door_x and y == self.door_y:
-                    self.squares[y][x] = SquareState.OPEN
-                    self.square_height[y][x] = self.door_z
+                elif self.is_numeric(square):
+                    self.squares[x][y] = OPEN
+                    self.square_height[x][y] = float(RoomModel.parse(square))
 
-                x = x + 1
+                if self.door_x == x and self.door_y == y:
+                    self.squares[x][y] = OPEN
+                    self.square_height[x][y] = float(self.door_z)
 
-    def generate_relative_heightmap(self) -> None:
-        pass
+                self.square_char[x][y] = square
+
+        string_builder = ""
+
+        for y in range(0, self.map_size_y):
+            for x in range(0, self.map_size_x):
+
+                try:
+                    if x == self.door_x and y == self.door_y:
+                        string_builder += str(self.door_z)
+                    else:
+                        string_builder += self.square_char[x][y]
+                except Exception as e:
+                    string_builder += "0"
+
+            string_builder += chr(13)
+
+        self.floor_map = string_builder
 
     @staticmethod
-    def parse(square: str):
+    def parse(square):
 
         if square == "0":
             return 0
@@ -135,3 +130,13 @@ class RoomModel:
             return 32
 
         return -1
+
+    def is_numeric(self, square):
+        try:
+            number = float(square)
+            return True
+        except Exception as e:
+            return False
+
+    def get_2d_array(self, data_type=None):
+        return [[data_type for y in range(0, self.map_size_y)] for x in range(0, self.map_size_x)]

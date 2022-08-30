@@ -7,5 +7,5 @@ from network.binary.request import Request
 class HeightMapMessageEvent(MessageEvent):
     @staticmethod
     def handle(user: User, request: Request):
-        model = user.room_user.room.model
-        RoomUtils.load_heightmap(user, model)
+        room = user.room_user.room
+        RoomUtils.load_heightmap(user, room)

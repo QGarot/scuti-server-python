@@ -8,4 +8,4 @@ class EnterRoomMessageEvent(MessageEvent):
     @staticmethod
     def handle(user: User, request: Request):
         room_id = request.read_int()
-        RoomUtils.load_room(user, room_id)
+        RoomUtils.load_room(user, 7)

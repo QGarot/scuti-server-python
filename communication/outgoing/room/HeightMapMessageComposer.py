@@ -17,4 +17,4 @@ class HeightMapMessageComposer(MessageComposer):
 
         for y in range(self.room_model.map_size_y):
             for x in range(self.room_model.map_size_x):
-                self.response.write_short(int(self.room_model.square_height[y][x] * 256))
+                self.response.write_short(int(self.room_model.square_height[x][y] * 256))
