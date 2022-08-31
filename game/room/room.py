@@ -23,6 +23,13 @@ class Room:
 
         return users
 
+    def get_virtual_counter(self):
+        """
+        Usefull to set the virtual_id of a room_user!
+        :return:
+        """
+        return len(self.entities) - 1
+
     def send(self, message_composer: MessageComposer):
         """
         Send message to all users in this room

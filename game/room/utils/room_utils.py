@@ -18,19 +18,19 @@ class RoomUtils:
         :param room_id:
         :return:
         """
-        # Room object
+        # Create room object
         room = RoomManager.get_instance().get_room_by_id(room_id)
-        print(room.get_data().name + " is loading...")
         room_model_name = room.get_data().model
         room.model = RoomManager.get_instance().models[room_model_name]
 
-        # Room User
+        # Set room user properties
         user.room_user.room = room
         user.room_user.x = room.get_model().door_x
         user.room_user.y = room.get_model().door_y
         user.room_user.z = room.get_model().door_z
         user.room_user.rotation = room.get_model().door_rotation
         user.room_user.head_rotation = room.get_model().door_rotation
+        user.room_user.virtual_id = room.get_virtual_counter()
 
         user.send(RoomModelMessageComposer(room_model_name, room_id))
 
@@ -52,7 +52,7 @@ class RoomUtils:
     @staticmethod
     def load_heightmap(user: User, room: Room):
         """
-        Load heightmap, walls, items.
+        Load heightmap, walls, items etc...
         :param room:
         :param user:
         :return:
