@@ -1,7 +1,7 @@
 from utils.array import Matrix
 
-OPEN = 0
-CLOSED = 1
+VALID = 1
+INVALID = 0
 
 
 class RoomModel:
@@ -20,7 +20,7 @@ class RoomModel:
         self.generate_heightmap_lookups()
 
         self.floor_map = None
-        self.generate_relative_heightmap()
+        self.generate_relative_hp()
 
     def generate_heightmap_lookups(self):
         temporary = self.heightmap.split("{13}")
@@ -35,19 +35,30 @@ class RoomModel:
             x = 0
             for square in line:
                 if square == "x":
-                    self.squares.set(x, y, CLOSED)
+                    if x == self.door_x and y == self.door_y:
+                        self.squares.set(x, y, VALID)
+                    else:
+                        self.squares.set(x, y, INVALID)
                 else:
-                    self.squares.set(x, y, OPEN)
+                    self.squares.set(x, y, VALID)
                     self.square_height.set(x, y, RoomModel.parse(square))
-
-                if x == self.door_x and y == self.door_y:
-                    self.squares.set(x, y, OPEN)
-                    self.square_height.set(x, y, self.door_z)
 
                 x = x + 1
 
     def generate_relative_heightmap(self):
         self.floor_map = self.heightmap.replace("{13}", chr(13))
+
+    def generate_relative_hp(self):
+        builder = ""
+        for y in range(self.map_size_y):
+            for x in range(self.map_size_x):
+                if self.squares.get(x, y) == INVALID:
+                    builder += "x"
+                else:
+                    builder += str(self.square_height.get(x, y))
+            builder += chr(13)
+
+        self.floor_map = builder
 
     @staticmethod
     def parse(square):
@@ -119,4 +130,4 @@ class RoomModel:
         if square == "w":
             return 32
 
-        return -1
+        return 0
