@@ -19,10 +19,8 @@ class UserStatusMessageComposer(MessageComposer):
                 self.response.write_int(entity.get_room_user().x)
                 self.response.write_int(entity.get_room_user().y)
                 self.response.write_string(str(entity.get_room_user().z))
-                self.response.write_int(6)
-                self.response.write_int(1)
-
-                print(entity.get_room_user().y, entity.get_room_user().rotation)
+                self.response.write_int(entity.get_room_user().rotation)
+                self.response.write_int(entity.get_room_user().head_rotation)
 
                 status = "/"
 
@@ -30,5 +28,3 @@ class UserStatusMessageComposer(MessageComposer):
                     status += key + " " + value + "/"
 
                 self.response.write_string(status + "/")
-
-                print("ok stp enft")
